@@ -1,8 +1,25 @@
 const itemList = document.getElementById('itemList')
+const shopList = document.getElementById('itemList');
+const arsenalList = document.getElementById('early-game');
+
+function updateTotalCost() {
+    const arsenalItems = arsenalList.querySelectorAll('li');
+    let totalCost = 0;
+
+    arsenalItems.forEach(item => {
+        const cost = parseInt(item.dataset.goldTotal, 10);
+        if (!isNaN(cost)) {
+            totalCost += cost;
+        }
+    });
+
+    const totalCostElement = document.getElementById('total-cost');
+    totalCostElement.textContent = `Gold: ${totalCost}`;
+}
 
 function createItemOnShop(item) {
     return `
-        <li class="item">
+        <li class="item" data-gold-total="${item.goldTotal}">
             <img src="https://ddragon.leagueoflegends.com/cdn/15.17.1/img/item/${item.imageFull}" alt="${item.name}">
             <div class="price">
                 ${item.goldTotal}
@@ -50,6 +67,41 @@ function filterItemsByIsActive(items) {
         return isPurchasable && hasPlaintext && noChampionBound && notInGameModified && isActiveOnMap;
     });
 }
+
+shopList.addEventListener('click', event => {
+    const clickedItem = event.target.closest('.item');
+
+    if (!clickedItem) {
+        return;
+    }
+
+    const itemCost = clickedItem.dataset.goldTotal;
+    const imgSrc = clickedItem.querySelector('img').src;
+    
+    const newItemLi = document.createElement('li');
+    newItemLi.classList.add('item');
+    newItemLi.setAttribute('data-gold-total', itemCost);
+
+    newItemLi.innerHTML = `
+        <img src="${imgSrc}">
+        <div class="price">
+            ${itemCost}
+        </div>
+    `;
+
+    arsenalList.appendChild(newItemLi);
+
+    updateTotalCost();
+});
+
+arsenalList.addEventListener('click', event => {
+    const clickedItem = event.target.closest('li');
+    if (!clickedItem) return;
+
+    clickedItem.remove();
+
+    updateTotalCost();
+});
 
 document.addEventListener('DOMContentLoaded', async function() {
     const itemsObject = await lolAPI.getItems();
