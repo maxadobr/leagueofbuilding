@@ -1,28 +1,33 @@
 .builder {
     display: flex;
-    margin: auto;
-    margin-top: 20px;
-    gap: 1rem;
+    flex-direction: column;
+    padding: 5vw 0;
+    gap: 0.5rem;
     flex-wrap: wrap;
     width: 100%;
-    justify-content: center;
+    align-content: center;
 }
 
 .shop {
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--fg-color);
-    border-radius: 0.5rem;
+    border-radius: 1rem;
     width: 80vw;
+    max-width: 460px;
+    min-width: 320px;
 }
 
 #itemList {
     display: grid;
     grid-auto-flow: row;
-    grid-template-columns: repeat(5, 64px);
+    grid-template-columns: repeat(4, 64px);
+    gap: 1rem 0.5rem;
     max-height: 224px;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 1rem;
-    justify-items: center;
+    padding: 0.5rem;
+    margin: 0;
     justify-content: center;
     width: 98%;
 
@@ -34,9 +39,9 @@
 .filters {
     display: flex;
     justify-content: center;
-    padding-top: 0.5rem;
+    padding: 0 1rem;
     width: 100%;
-    justify-content: space-around;
+    justify-content: space-between;
 }
 
 .filter {
@@ -59,11 +64,18 @@
     font-size: xx-small;
     letter-spacing: 0.02rem;
     font-weight: 100;
+    visibility: hidden;
+}
+
+.item:hover {
+    filter: brightness(1.2);
+    filter: hue-rotate(1.05);
 }
 
 .item {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
     align-items: center;
     justify-items: center;
     justify-content: center;
@@ -74,7 +86,7 @@
 
 .item img {
     border: solid 1px var(--bg-secondary);
-    border-radius: 5px;
+    border-radius: 0.4rem;
 }
 
 .arsenal {
@@ -82,13 +94,15 @@
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    border-radius: 0.5rem;
     width: 100%;
+    max-width: 460px;
+    min-width: 320px;
     height: min-content;
     justify-content: center;
     align-items: center;
     width: 80vw;
     border: 1px solid var(--fg-color);
+    border-radius: 1rem;
 }
 
 .arsenal header {
@@ -113,7 +127,7 @@
     gap: 0.5rem;
     background-color: var(--bg-lighter);
     border: 1px solid var(--fg-color);
-    border-radius: 5px;
+    border-radius: 0.75rem;
     align-content: center;
     justify-items: center;
     justify-content: center;
@@ -139,6 +153,49 @@
 
 .stage li span {
     display: none;
+}
+
+@media (min-width: 1100px) {
+    .builder {
+        flex-direction: row;
+        margin: auto;
+        max-width: 80vw;
+        gap: 5vw;
+        padding: 2rem 0;
+    }
+
+    .shop,
+    .arsenal {
+        max-width: 45%;
+        margin: 0;
+    }
+
+    .filters {
+        padding: 0.5rem 4rem;
+    }
+
+    #itemList {
+        max-height: none;
+        height: 100%;
+        grid-template-columns: repeat(5, 72px);
+        gap: 2rem 1rem;
+    }
+
+    .item img, 
+    .stage .item img {
+        height: 72px;
+        width: 72px;
+    }
+
+    .shop {
+        height: 70vh;
+    }
+
+    .stage {
+        grid-template-columns: repeat(5, 72px);
+        gap: 2rem 1rem;
+        padding: 2rem 1rem;
+    }
 }
 
 .debug {
