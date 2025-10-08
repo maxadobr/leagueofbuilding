@@ -90,8 +90,8 @@
 }
 
 .arsenal {
-    margin: auto;
-    margin-top: 20px;
+    margin: 1rem 0;
+    padding: 1rem 2rem;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -115,15 +115,13 @@
 .arsenal header h3 {
     text-align: right;
     justify-self: flex-end;
-    padding-right: 1.5rem;
 }
 
 .stage {
     display: grid;
     grid-template-columns: repeat(4, 64px);
     grid-auto-flow: row;
-    margin-top: 1rem;
-    padding: 0.85rem;
+    width: 100%;
     gap: 0.5rem;
     background-color: var(--bg-lighter);
     border: 1px solid var(--fg-color);
@@ -132,7 +130,6 @@
     justify-items: center;
     justify-content: center;
     overflow: hidden;
-    width: 90%;
     min-height: 100px;
 }
 
